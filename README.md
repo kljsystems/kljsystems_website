@@ -9,12 +9,30 @@ Plain HTML, CSS and JavaScript. No build step and no dependencies.
 - `contact.html`: the contact form. Links from the home page pre-fill it, for example `contact.html?service=Website`.
   The "Send this build to KLJ" button carries the whole parts list into the message box.
 
-## The 3D PC on the first screen
+## The PC on the first screen
 
-`js/pc3d.js` builds a mid-tower PC in Three.js (loaded from the jsDelivr CDN) and loops it apart and back together,
-with a label on each part. Visitors can drag to turn it and press Pause. With "reduce motion" switched on it shows
-the exploded view, still. If a browser has no 3D support, the motherboard photo underneath shows instead.
-Add `?pc=apart` or `?pc=together` to the URL to freeze it in one pose (useful for screenshots).
+The hero plays a 64-frame image sequence of an exploded PC as you scroll (`js/hero.js`, frames in `assets/pc/d` for wide
+screens and `assets/pc/m` for phones, about 1.3 MB each). The frames are rendered from a Three.js model in
+`tools/pc3d.js`; nothing 3D runs on the live page, so it stays fast. Hotspot positions and part descriptions live in
+`assets/pc/*/hotspots.json`.
+
+To re-render after changing the model: serve the site locally, run `node tools/render-frames.mjs` (uses headless
+Chrome), then convert the PNGs in `.frames/` to WebP:
+
+```bash
+ffmpeg -i .frames/desktop/%03d.png -c:v libwebp -quality 74 -start_number 0 assets/pc/d/%03d.webp
+```
+
+```bash
+ffmpeg -i .frames/mobile/%03d.png -c:v libwebp -quality 74 -start_number 0 assets/pc/m/%03d.webp
+```
+
+Copy `.frames/*/hotspots.json` into the matching folder.
+
+## Design rules
+
+`design-system.md` is the source of truth for colours, type (Geist), components, imagery, motion and voice.
+Update it first when something changes.
 
 ## Run it locally
 

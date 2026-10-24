@@ -124,7 +124,7 @@
       $('t-fee').textContent = money(FEE);
       $('t-total').textContent = money(partsSum + FEE);
       $('sheet-note').textContent = under
-        ? `The smallest sensible ${build.label.toLowerCase()} build comes to about ${money(total(tier))}. Tell us your limit and we will look at used or carried-over parts.`
+        ? `The smallest sensible ${build.label.toLowerCase()} build comes to about ${money(total(tier))}. Tell us your limit and we'll look at used or carried-over parts.`
         : 'Part prices move every week. This sheet is a starting point; your quote is written and fixed before we order anything.';
 
       const summary = [

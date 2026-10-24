@@ -1,4 +1,5 @@
-/* KLJ Systems — the exploded PC on the first screen.
+/* KLJ Systems — the exploded PC model (source for the hero's image sequence).
+   tools/render.html loads this with window.KLJ_RENDER set and saves frames; see tools/render-frames.mjs.
    A mid-tower modelled part by part in Three.js: painted steel case, perforated mesh, glass, a motherboard with
    its components, tower cooler, memory, M.2 drive, graphics card, power supply with sleeved cables, and fans.
    It comes apart into labelled parts, holds, and goes back together. Point at a part to read what it does,
@@ -20,7 +21,7 @@ if (stage && canvas) start();
 function start() {
   let renderer;
   try {
-    renderer = new THREE.WebGLRenderer({ canvas, antialias: true, powerPreference: 'high-performance' });
+    renderer = new THREE.WebGLRenderer({ canvas, antialias: true, powerPreference: 'high-performance', preserveDrawingBuffer: !!window.KLJ_RENDER });
   } catch {
     return; // no WebGL: the photograph underneath stays
   }
@@ -468,10 +469,10 @@ function start() {
     glass: ['Glass side panel', 'Tempered glass so the build is on show. We route every cable behind the tray, so the view stays clean.'],
     case: ['Case', 'The frame that holds it all. We choose cases for airflow first and looks second, with room to upgrade later.'],
     fans: ['Case fans', 'Pull cool air in at the front and push warm air out the back. We tune the fan curves so it stays quiet at your desk.'],
-    board: ['Motherboard', 'The board every part plugs into. We pick one with the ports, Wi-Fi and upgrade room you will actually use.'],
+    board: ['Motherboard', 'The board every part plugs into. We pick one with the ports, Wi-Fi and upgrade room you'll actually use.'],
     cpu: ['Processor', 'The CPU runs everything you do. Gaming builds favour fast cores; editing and workstation builds favour more of them.'],
     cooler: ['CPU cooler', 'Keeps the processor cool and quiet under load. Every build runs a 24-hour stress test before it leaves the shop.'],
-    memory: ['Memory', 'RAM holds what you are working on right now. 32 GB covers most people; video editing and 3D want 64 GB or more.'],
+    memory: ['Memory', 'RAM holds what you're working on right now. 32 GB covers most people; video editing and 3D want 64 GB or more.'],
     storage: ['Storage', 'The NVMe SSD where Windows, games and files live. It boots in seconds, and we set up backups so nothing is lost.'],
     gpu: ['Graphics card', 'Draws every frame in games and speeds up video and AI work. Usually the biggest single part of the budget.'],
     psu: ['Power supply', 'Feeds steady power to every part. We size it with headroom and fit 80+ Gold or better, never a no-name unit.'],
@@ -737,5 +738,31 @@ function start() {
   else { clock = CYCLE * 0.05; }
   fit();
   stage.classList.add('is-live');
+
+  // render mode: no loop; the frame exporter calls these
+  if (window.KLJ_RENDER) {
+    scene.background = new THREE.Color(0x000000);
+    renderer.setPixelRatio(1);
+    fit();
+    window.__klj = {
+      frame(t, yawOffset = 0) {
+        explode = t;
+        applyExplode(t);
+        pc.rotation.set(0.18, -0.55 + yawOffset, 0);
+        composer.render();
+        return canvas.toDataURL('image/png');
+      },
+      anchors() {
+        pc.updateMatrixWorld(true);
+        return labels.map(({ p }) => {
+          tmp.set(...p.anchor);
+          p.obj.localToWorld(tmp);
+          tmp.project(camera);
+          return { id: p.id, title: INFO[p.id][0], text: INFO[p.id][1], x: +(tmp.x * 0.5 + 0.5).toFixed(4), y: +(-tmp.y * 0.5 + 0.5).toFixed(4) };
+        });
+      },
+    };
+    return;
+  }
   kick();
 }

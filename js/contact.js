@@ -88,7 +88,7 @@ const CONTACT = {
       el.focus();
       return;
     }
-    if (form.elements.company.value) { finish('We will reply within one business day.'); return; }
+    if (form.elements.company.value) { finish('We\'ll reply within one business day.'); return; }
 
     const name = form.elements.name.value.trim().split(' ')[0];
     if (CONTACT.endpoint) {
@@ -97,11 +97,11 @@ const CONTACT = {
       try {
         const res = await fetch(CONTACT.endpoint, { method: 'POST', headers: { Accept: 'application/json' }, body: new FormData(form) });
         if (!res.ok) throw new Error(String(res.status));
-        finish(`Thanks ${name}. We will reply to ${form.elements.email.value.trim()} within one business day.`);
+        finish(`Thanks ${name}. We'll reply to ${form.elements.email.value.trim()} within one business day.`);
       } catch {
         send.disabled = false;
         send.firstChild.textContent = 'Send request ';
-        $('e-message').textContent = `That did not go through. Please try again, or email ${CONTACT.email} directly.`;
+        $('e-message').textContent = `That didn't send. Try again, or email ${CONTACT.email} directly.`;
       }
       return;
     }

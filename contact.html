@@ -1,0 +1,190 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Contact KLJ Systems — repairs, builds, websites and automation</title>
+<meta name="description" content="Tell KLJ Systems what you need: a PC repair, a custom build, a website, AI automation or IT support. Reply within one business day.">
+<meta name="theme-color" content="#0e0c12">
+<link rel="icon" href="assets/favicon.svg" type="image/svg+xml">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Schibsted+Grotesk:wght@400;600;800&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="css/site.css">
+<script>document.documentElement.classList.add('js')</script>
+</head>
+<body>
+<a class="skip" href="#form">Skip to the form</a>
+
+<header class="bar">
+  <a class="bar__mark" href="index.html"><span class="bar__chip" aria-hidden="true"><i></i><i></i><i></i><i></i></span>KLJ Systems</a>
+  <nav class="bar__links" aria-label="Main">
+    <a href="index.html#services">Services</a>
+    <a href="index.html#build">Price a build</a>
+    <a href="index.html#pricing">Pricing</a>
+    <a href="index.html#faq">FAQ</a>
+    <a href="contact.html" aria-current="page">Contact</a>
+  </nav>
+  <a class="button" href="index.html#build">Price a build <span class="arrow" aria-hidden="true">→</span></a>
+</header>
+
+<main id="main" class="contact">
+  <div class="contact__side">
+    <div class="ctile ctile--title">
+      <h1 data-lines>Tell us what you need</h1>
+      <p data-reveal>A few lines is plenty. We reply within one business day with next steps and, where we can, a price.</p>
+    </div>
+    <div class="ctile ctile--dark ctile--wide" data-reveal style="--i:1">
+      <h2>Email</h2>
+      <p class="lead"><a class="link-on" href="mailto:hello@kljsystems.com">hello@kljsystems.com</a></p>
+    </div>
+    <div class="ctile" data-reveal style="--i:2">
+      <h2>Hours</h2>
+      <p class="lead">Mon to Sat<br>9 am to 6 pm</p>
+    </div>
+    <div class="ctile ctile--dark" data-reveal style="--i:3">
+      <h2>Where we work</h2>
+      <p class="lead">In the shop, on site, or remotely.</p>
+    </div>
+    <figure class="ctile ctile--pic" data-reveal style="--i:4">
+      <video autoplay muted loop playsinline preload="metadata" poster="assets/img/loten-salmiakstein-poster.jpg" width="854" height="480" aria-hidden="true"><source src="assets/img/loten-salmiakstein.webm" type="video/webm"></video>
+      <figcaption>Tinning a soldering tip</figcaption>
+    </figure>
+    <figure class="ctile ctile--pic" data-reveal style="--i:5">
+      <img src="assets/img/collection-of-historical-cpus.jpg" width="1600" height="1066" alt="A pile of desktop processors from three decades" loading="lazy">
+      <figcaption>Processors we have met</figcaption>
+    </figure>
+    <figure class="ctile ctile--pic" data-reveal style="--i:6">
+      <img src="assets/img/server-room-22397102849.jpg" width="1600" height="1066" alt="Server racks with network cabling in a small server room" loading="lazy">
+      <figcaption>Office networks</figcaption>
+    </figure>
+    <figure class="ctile ctile--pic" data-reveal style="--i:7">
+      <img src="assets/img/mx-brown-key-switches.jpg" width="1600" height="1200" alt="Backlit mechanical key switches with the keycaps removed" loading="lazy">
+      <figcaption>Keyboard switches, mid rebuild</figcaption>
+    </figure>
+  </div>
+
+  <section class="formtile on-paper" id="form" aria-labelledby="form-title">
+    <div id="form-area">
+      <h2 id="form-title" data-reveal>Send a request</h2>
+      <div class="prefill" id="prefill" hidden>
+        <b>Your build sheet is attached below.</b>
+        <span>Change anything you like before you send it.</span>
+      </div>
+
+      <form class="form" id="contact-form" action="mailto:hello@kljsystems.com" method="post" enctype="text/plain" novalidate style="margin-top:32px">
+        <div class="fld">
+          <label for="f-name">Name</label>
+          <input id="f-name" name="name" type="text" autocomplete="name" required aria-describedby="e-name">
+          <span class="err" id="e-name" aria-live="polite"></span>
+        </div>
+        <div class="fld">
+          <label for="f-email">Email</label>
+          <input id="f-email" name="email" type="email" autocomplete="email" spellcheck="false" required aria-describedby="e-email">
+          <span class="err" id="e-email" aria-live="polite"></span>
+        </div>
+        <div class="fld">
+          <label for="f-phone">Phone <span class="opt">(optional)</span></label>
+          <input id="f-phone" name="phone" type="tel" autocomplete="tel">
+        </div>
+        <div class="fld">
+          <label for="f-reach">Best way to reach you</label>
+          <select id="f-reach" name="reach">
+            <option>Email</option>
+            <option>Phone call</option>
+            <option>Text message</option>
+          </select>
+        </div>
+
+        <fieldset class="fld full" aria-describedby="e-service">
+          <legend>What do you need?</legend>
+          <div class="chips">
+            <label class="chip"><input type="radio" name="service" value="PC repair" required><span>PC repair</span></label>
+            <label class="chip"><input type="radio" name="service" value="Custom PC build"><span>Custom PC build</span></label>
+            <label class="chip"><input type="radio" name="service" value="Website"><span>Website</span></label>
+            <label class="chip"><input type="radio" name="service" value="AI automation"><span>AI automation</span></label>
+            <label class="chip"><input type="radio" name="service" value="IT support"><span>IT support</span></label>
+            <label class="chip"><input type="radio" name="service" value="Something else"><span>Something else</span></label>
+          </div>
+          <span class="err" id="e-service" aria-live="polite"></span>
+        </fieldset>
+
+        <div class="fld">
+          <label for="f-budget">Budget <span class="opt">(optional)</span></label>
+          <select id="f-budget" name="budget">
+            <option value="">Not sure yet</option>
+            <option>Under $500</option>
+            <option>$500 to $1,500</option>
+            <option>$1,500 to $3,000</option>
+            <option>$3,000 or more</option>
+          </select>
+        </div>
+        <div class="fld">
+          <label for="f-when">When do you need it?</label>
+          <select id="f-when" name="when">
+            <option>As soon as possible</option>
+            <option>Within a couple of weeks</option>
+            <option>This month or later</option>
+            <option>Just getting prices</option>
+          </select>
+        </div>
+
+        <div class="fld full">
+          <label for="f-message">Tell us about it</label>
+          <textarea id="f-message" name="message" required aria-describedby="h-message e-message" placeholder="e.g. My laptop shuts off after ten minutes of use. Dell XPS 13, about four years old…"></textarea>
+          <span class="hint" id="h-message">Two or three sentences is plenty.</span>
+          <span class="err" id="e-message" aria-live="polite"></span>
+        </div>
+
+        <div class="hp" aria-hidden="true"><label for="f-company">Leave this empty</label><input id="f-company" name="company" type="text" tabindex="-1" autocomplete="off"></div>
+
+        <div class="form__send">
+          <button class="button" type="submit" id="send">Send request <span class="arrow" aria-hidden="true">→</span></button>
+          <p>We only use your details to reply to this request.</p>
+        </div>
+      </form>
+    </div>
+
+    <div class="done" id="done" hidden tabindex="-1">
+      <h2>Thanks, it is on its way</h2>
+      <p id="done-text">We will reply within one business day.</p>
+      <a class="button" href="index.html">Back to the home page</a>
+    </div>
+  </section>
+</main>
+
+<footer class="foot">
+  <div class="blocks" aria-label="KLJ Systems" role="img" data-reveal-group>
+    <span class="block" style="--h:100%;--hs:1.4;--i:0" aria-hidden="true">K</span>
+    <span class="block" style="--h:78%;--hs:1.1;--i:1" aria-hidden="true">L</span>
+    <span class="block" style="--h:92%;--hs:1.3;--i:2" aria-hidden="true">J</span>
+    <span class="block block--gap" aria-hidden="true"></span>
+    <span class="brk" aria-hidden="true"></span>
+    <span class="block" style="--h:64%;--hs:.9;--i:3" aria-hidden="true">S</span>
+    <span class="block" style="--h:84%;--hs:1;--i:4" aria-hidden="true">y</span>
+    <span class="block" style="--h:70%;--hs:.85;--i:5" aria-hidden="true">s</span>
+    <span class="block" style="--h:96%;--hs:1.05;--i:6" aria-hidden="true">t</span>
+    <span class="block" style="--h:60%;--hs:.8;--i:7" aria-hidden="true">e</span>
+    <span class="block" style="--h:80%;--hs:.95;--i:8" aria-hidden="true">m</span>
+    <span class="block" style="--h:68%;--hs:.9;--i:9" aria-hidden="true">s</span>
+  </div>
+  <div class="foot__grid">
+    <nav class="foot__col" aria-label="Services"><h3>Services</h3><a href="index.html#websites">Websites</a><a href="index.html#automation">AI automation</a><a href="index.html#builds">Custom PC builds</a><a href="index.html#repairs">PC repair</a><a href="index.html#support">IT support</a></nav>
+    <nav class="foot__col" aria-label="Company"><h3>On this site</h3><a href="index.html#build">Price a build</a><a href="index.html#process">How it works</a><a href="index.html#pricing">Pricing</a><a href="index.html#faq">FAQ</a></nav>
+    <nav class="foot__col" aria-label="Get in touch"><h3>Get in touch</h3><a href="contact.html">Contact form</a><a href="contact.html?service=PC%20repair">Book a repair</a><a href="contact.html?service=Website">Plan a website</a></nav>
+    <div class="foot__contact">
+      <p class="lead"><a class="link" href="mailto:hello@kljsystems.com">hello@kljsystems.com</a></p>
+      <p>Monday to Saturday, 9 am to 6 pm. In-shop, on-site and remote help.</p>
+    </div>
+  </div>
+  <div class="foot__last">
+    <span>© <span data-year>2026</span> KLJ Systems</span>
+    <a class="button" href="#main">Back to top <span class="arrow" aria-hidden="true">↑</span></a>
+  </div>
+  <p class="credits">Pictures and footage: <a href="https://commons.wikimedia.org/wiki/File:MX_brown_key_switches.jpg">“MX brown key switches”</a> by ptm m, public domain; <a href="https://commons.wikimedia.org/wiki/File:Collection_of_historical_CPUs.jpg">“Collection of historical CPUs”</a> by Martijn Boer, public domain; <a href="https://commons.wikimedia.org/wiki/File:Server_Room_(22397102849).jpg">“Server Room”</a> by Carl Lender, <a href="https://creativecommons.org/licenses/by/2.0">CC BY 2.0</a>;<a href="https://commons.wikimedia.org/wiki/File:L%C3%B6ten_Salmiakstein.webm">“Löten Salmiakstein”</a> by Leo Miregalitheo, <a href="https://creativecommons.org/licenses/by-sa/4.0">CC BY-SA 4.0</a>. Both via Wikimedia Commons.</p>
+</footer>
+
+<script src="js/site.js" defer></script>
+<script src="js/contact.js" defer></script>
+</body>
+</html>

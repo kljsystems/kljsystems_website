@@ -1,0 +1,286 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>KLJ Systems — Websites, AI automation, custom PCs and repairs</title>
+<meta name="description" content="KLJ Systems is one IT shop for websites, AI automation, custom PC builds, PC repairs and everyday IT support. Price a build online or send a request.">
+<meta name="theme-color" content="#0e0c12">
+<link rel="icon" href="assets/favicon.svg" type="image/svg+xml">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Schibsted+Grotesk:wght@400;600;800&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="css/site.css">
+<script>document.documentElement.classList.add('js')</script>
+</head>
+<body>
+<a class="skip" href="#main">Skip to content</a>
+
+<header class="bar">
+  <a class="bar__mark" href="index.html"><span class="bar__chip" aria-hidden="true"><i></i><i></i><i></i><i></i></span>KLJ Systems</a>
+  <nav class="bar__links" aria-label="Main">
+    <a href="#services">Services</a>
+    <a href="#build">Price a build</a>
+    <a href="#process">How it works</a>
+    <a href="#pricing">Pricing</a>
+    <a href="#faq">FAQ</a>
+  </nav>
+  <a class="button" href="contact.html">Contact <span class="arrow" aria-hidden="true">→</span></a>
+</header>
+
+<!-- First screen: the name on a white panel, and a PC that takes itself apart -->
+<header class="hero" aria-label="KLJ Systems">
+  <div class="panel">
+    <h1 data-load style="--d:150ms">KLJ Systems</h1>
+    <p class="panel__sentence" data-load style="--d:250ms">Websites, AI automation, custom PCs and repairs, all from one IT shop.</p>
+    <ul class="panel__lines" data-load style="--d:330ms">
+      <li>Written price before any work starts</li>
+      <li>In-shop, on-site or remote</li>
+    </ul>
+    <a class="button button--forest" href="contact.html" data-load style="--d:400ms">Start a project <span class="arrow" aria-hidden="true">→</span></a>
+    <nav class="panel__services" aria-label="Services" data-load style="--d:480ms">
+      <a href="#websites">Websites <span aria-hidden="true">→</span></a>
+      <a href="#automation">AI automation <span aria-hidden="true">→</span></a>
+      <a href="#builds">Custom PC builds <span aria-hidden="true">→</span></a>
+      <a href="#repairs">PC repair <span aria-hidden="true">→</span></a>
+      <a href="#support">IT support <span aria-hidden="true">→</span></a>
+    </nav>
+  </div>
+
+  <figure class="stage" id="stage">
+    <img class="stage__poster" src="assets/img/computer-motherboard-6.jpg" width="1600" height="1200" alt="An open desktop tower: motherboard, cooler, memory and cables" fetchpriority="high">
+    <canvas class="stage__canvas" id="pc3d" aria-label="A 3D desktop PC taking itself apart into its parts and going back together" role="img"></canvas>
+    <div class="stage__labels" id="pc3d-labels" aria-hidden="true"></div>
+    <figcaption class="stage__bar">
+      <span>Point at any part to see what it does. Drag to turn it.</span>
+      <button class="stage__toggle" id="pc3d-toggle" type="button" aria-pressed="false">Pause</button>
+    </figcaption>
+  </figure>
+</header>
+
+
+
+<main id="main">
+
+<!-- Services: one statement cell, five dark rows -->
+<section class="services" id="services" aria-labelledby="services-title">
+  <div class="services__cell">
+    <h2 id="services-title"><span class="zz">One shop for</span><span class="zz zz--r">everything digital</span></h2>
+    <figure class="services__pic" data-reveal><img src="assets/img/electronics-workbench.jpg" width="1600" height="1212" alt="A busy electronics bench with test gear, a keyboard and a monitor" loading="lazy"></figure>
+    <div class="services__foot">
+      <p data-reveal>Most people juggle a web designer, a repair shop and a friend who is good with computers. KLJ Systems does all three jobs, so one person knows your whole setup.</p>
+      <a class="button button--forest" href="#pricing" data-reveal style="--i:1">See prices <span class="arrow" aria-hidden="true">→</span></a>
+    </div>
+  </div>
+  <ul class="services__rows">
+    <li class="row" id="websites">
+      <h3 data-reveal>Websites</h3>
+      <p data-reveal style="--i:1">Fast, hand-built sites for small businesses, with the domain, hosting and email set up for you. You get a site you can update yourself.</p>
+      <ul data-reveal style="--i:2"><li>Design and build</li><li>Hosting and domains</li><li>Search basics</li></ul>
+    </li>
+    <li class="row" id="automation">
+      <h3 data-reveal>AI automation</h3>
+      <p data-reveal style="--i:1">We connect AI to the work you repeat every day: sorting the inbox, reading invoices, answering common questions, booking and reports.</p>
+      <ul data-reveal style="--i:2"><li>Email and document triage</li><li>Chat assistants</li><li>Workflow bots</li></ul>
+    </li>
+    <li class="row" id="builds">
+      <h3 data-reveal>Custom PC builds</h3>
+      <p data-reveal style="--i:1">Parts chosen for what you actually do, then assembled, cable-managed and stress-tested before you pick it up.</p>
+      <ul data-reveal style="--i:2"><li>Gaming</li><li>Streaming and editing</li><li>Workstations</li></ul>
+    </li>
+    <li class="row" id="repairs">
+      <h3 data-reveal>PC repair</h3>
+      <p data-reveal style="--i:1">Slow, dead, cracked or infected. We diagnose first, give you a price before any work, then fix it, laptops and desktops alike.</p>
+      <ul data-reveal style="--i:2"><li>Diagnostics</li><li>Virus removal</li><li>Data recovery</li></ul>
+    </li>
+    <li class="row" id="support">
+      <h3 data-reveal>IT support</h3>
+      <p data-reveal style="--i:1">Wi-Fi that drops, printers that vanish, backups nobody checks, a new hire's laptop. At home or at the office, one call covers it.</p>
+      <ul data-reveal style="--i:2"><li>Networks and Wi-Fi</li><li>Backups</li><li>Device setup</li></ul>
+    </li>
+  </ul>
+</section>
+
+<!-- Showcase: one picture cut across a board of tiles -->
+<section class="showcase" aria-labelledby="bench-title" data-reveal-group>
+  <div class="mosaic shutter" data-img="assets/img/computer-motherboard-6.jpg" data-img-sm="assets/img/computer-motherboard-6.jpg">
+    <img class="mosaic__fallback" src="assets/img/computer-motherboard-6.jpg" width="1600" height="1200" alt="An open desktop tower seen from above: motherboard, cooler, memory and cables" loading="lazy">
+    <div class="mcolor mcolor--head" style="--dc:1;--dr:1;--pc:1;--pr:1"><h2 id="bench-title">Built on our bench</h2><span class="small strong">Custom PC builds</span></div>
+    <p class="mcolor mcolor--fact" style="--dc:4;--dr:2;--pc:3;--pr:2"><b>24 hours</b>of stress testing before any build leaves the shop.</p>
+    <p class="mcolor mcolor--fact" style="--dc:2;--dr:3;--pc:1;--pr:3"><b>Tidy inside</b>Cables routed and tied, with the parts list taped inside the side panel.</p>
+    <p class="mcolor mcolor--fact hide-sm" style="--dc:6;--dr:3;--pc:3;--pr:4"><b>Clean install</b>Windows set up, drivers current, no trial software.</p>
+    <a class="mcolor mcolor--act" href="#build" style="--dc:5;--dr:4;--pc:2;--pr:5"><span class="lead">Price your build</span><span class="go" aria-hidden="true">→</span></a>
+  </div>
+  <p class="showcase__cap"><span>Inside a desktop tower: the board that everything else plugs into.</span><span>Hover a tile to look closer.</span></p>
+</section>
+
+<!-- The live thing: a build sheet that fills in -->
+<section class="builder" id="build" aria-labelledby="build-title">
+  <div class="builder__intro">
+    <h2 id="build-title" data-lines>Price your build</h2>
+    <p data-reveal>Pick what the PC is for and what you want to spend. The sheet fills in with the parts we would start from, at typical prices.</p>
+    <form class="builder__controls" id="builder-form" data-reveal style="--i:1">
+      <div class="budget">
+        <label for="budget"><span>Budget, all in</span><output id="budget-out" for="budget" class="nums">$2,000</output></label>
+        <div class="range" style="--p:0.2453"><input type="range" id="budget" name="budget" min="700" max="6000" step="100" value="2000"></div>
+        <div class="budget__ends"><span>$700</span><span>$6,000</span></div>
+      </div>
+      <fieldset class="uses" style="margin-top:32px">
+        <legend>What is it for?</legend>
+        <label class="use"><input type="radio" name="use" value="gaming" checked><span><b>Gaming</b><small>High frame rates</small></span></label>
+        <label class="use"><input type="radio" name="use" value="creator"><span><b>Streaming and editing</b><small>Video, photo, OBS</small></span></label>
+        <label class="use"><input type="radio" name="use" value="workstation"><span><b>Workstation</b><small>3D, code, local AI</small></span></label>
+        <label class="use"><input type="radio" name="use" value="office"><span><b>Home and office</b><small>School, email, docs</small></span></label>
+      </fieldset>
+    </form>
+  </div>
+
+  <article class="ticket" data-reveal style="--i:1">
+    <div class="ticket__top">
+      <h3>Build sheet</h3>
+      <div class="ticket__meta"><span id="sheet-use">Gaming</span><span id="sheet-tier">Tier 2 of 4</span></div>
+    </div>
+    <p class="ticket__fit" id="sheet-fit">Aimed at 1440p with high settings and a high-refresh monitor.</p>
+    <table class="parts" id="parts">
+      <thead><tr><th scope="col">Part</th><th scope="col">Our starting pick</th><th scope="col">Est.</th></tr></thead>
+      <tbody>
+        <tr><td>Processor</td><td>AMD Ryzen 7 9700X</td><td>$300</td></tr>
+        <tr><td>Graphics</td><td>NVIDIA GeForce RTX 5070, 12 GB</td><td>$560</td></tr>
+        <tr><td>Memory</td><td>32 GB DDR5-6000</td><td>$140</td></tr>
+        <tr><td>Storage</td><td>2 TB NVMe SSD</td><td>$140</td></tr>
+        <tr><td>Motherboard</td><td>B650 ATX, Wi-Fi</td><td>$160</td></tr>
+        <tr><td>Power</td><td>750 W, 80+ Gold</td><td>$100</td></tr>
+        <tr><td>Case and cooling</td><td>Airflow case, tower cooler</td><td>$150</td></tr>
+        <tr><td>Windows</td><td>Windows 11 Home licence</td><td>$120</td></tr>
+      </tbody>
+    </table>
+    <div class="totals">
+      <div><span>Parts</span><span id="t-parts">$1,670</span></div>
+      <div><span>Build, test and setup</span><span id="t-fee">$150</span></div>
+      <div class="grand" aria-live="polite"><span>Estimate</span><span id="t-total">$1,820</span></div>
+    </div>
+    <p class="ticket__note" id="sheet-note">Part prices move every week. This sheet is a starting point; your quote is written and fixed before we order anything.</p>
+    <div class="ticket__act">
+      <a class="button" id="send-build" href="contact.html?service=Custom%20PC%20build">Send this build to KLJ <span class="arrow" aria-hidden="true">→</span></a>
+    </div>
+  </article>
+</section>
+
+<!-- How it works: many into one -->
+<section class="process" id="process" aria-labelledby="process-title">
+  <div class="process__head">
+    <h2 id="process-title" data-lines>From mess to working</h2>
+    <p data-reveal>Every job, from a cracked screen to a new website, goes the same three ways. You always know what is happening and what it costs.</p>
+  </div>
+  <div class="process__body">
+    <svg class="flow flow--wide" id="flow-wide" viewBox="0 0 1350 300" aria-hidden="true" focusable="false"></svg>
+    <svg class="flow flow--tall" id="flow-tall" viewBox="0 0 300 400" aria-hidden="true" focusable="false"></svg>
+    <ol class="steps">
+      <li class="step" data-reveal><h3>Tell us</h3><p>Fill in the form, call or drop by. Describe the problem or the idea in your own words; no jargon needed.</p></li>
+      <li class="step" data-reveal style="--i:1"><h3>We sort it out</h3><p>We diagnose, scope and quote in writing. Nothing starts and nothing is ordered until you say yes.</p></li>
+      <li class="step" data-reveal style="--i:2"><h3>It just works</h3><p>We fix, build or launch it, show you how it works, and stay a message away afterwards.</p></li>
+    </ol>
+  </div>
+</section>
+
+<!-- Pricing: plans as a large table -->
+<section class="pricing on-paper" id="pricing" aria-labelledby="pricing-title">
+  <table class="plans">
+    <colgroup><col class="what"><col><col class="pick"><col><col></colgroup>
+    <thead>
+      <tr>
+        <th scope="col"><h2 id="pricing-title">Starting prices</h2></th>
+        <th scope="col"><span class="name">PC repair</span><span class="price">$49</span><span class="per">diagnostic, credited to the repair</span></th>
+        <th scope="col" class="pick"><span class="name">Custom PC</span><span class="price">$150</span><span class="per">build fee, parts at cost</span></th>
+        <th scope="col"><span class="name">Website</span><span class="price">$1,200</span><span class="per">one-time, five pages</span></th>
+        <th scope="col"><span class="name">AI automation</span><span class="price">$500</span><span class="per">per workflow, set up</span></th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr><th scope="row">Turnaround</th><td>1 to 3 days</td><td class="pick">5 to 10 days once parts arrive</td><td>2 to 4 weeks</td><td>1 to 3 weeks</td></tr>
+      <tr><th scope="row">What you get</th><td>Diagnosis, written quote, the fix</td><td class="pick">Assembly, 24-hour stress test, Windows setup</td><td>Design, build, domain, hosting setup</td><td>One workflow, built and documented</td></tr>
+      <tr><th scope="row">Afterwards</th><td>30 days on the fix</td><td class="pick">1 year on our labour</td><td>30 days of free edits</td><td>30 days of tuning</td></tr>
+      <tr><th scope="row">Ongoing</th><td>Not needed</td><td class="pick">Not needed</td><td>Care plan from $40 a month</td><td>Hosting from $50 a month</td></tr>
+    </tbody>
+    <tfoot>
+      <tr>
+        <td></td>
+        <td><a class="button" href="contact.html?service=PC%20repair">Book a repair</a></td>
+        <td class="pick"><a class="button" href="#build">Price a build</a></td>
+        <td><a class="button" href="contact.html?service=Website">Plan a website</a></td>
+        <td><a class="button" href="contact.html?service=AI%20automation">Automate a task</a></td>
+      </tr>
+    </tfoot>
+  </table>
+
+  <div class="plan-cards">
+    <h2 class="pricing__title">Starting prices</h2>
+    <article class="pcard"><h3>PC repair</h3><p class="price">$49</p><dl><div><dt>Turnaround</dt><dd>1 to 3 days</dd></div><div><dt>What you get</dt><dd>Diagnosis, written quote, the fix. The $49 is credited to the repair.</dd></div><div><dt>Afterwards</dt><dd>30 days on the fix</dd></div></dl><a class="button" href="contact.html?service=PC%20repair">Book a repair</a></article>
+    <article class="pcard pick"><h3>Custom PC</h3><p class="price">$150</p><dl><div><dt>Turnaround</dt><dd>5 to 10 days once parts arrive</dd></div><div><dt>What you get</dt><dd>Assembly, 24-hour stress test, Windows setup. Parts at cost.</dd></div><div><dt>Afterwards</dt><dd>1 year on our labour</dd></div></dl><a class="button" href="#build">Price a build</a></article>
+    <article class="pcard"><h3>Website</h3><p class="price">$1,200</p><dl><div><dt>Turnaround</dt><dd>2 to 4 weeks</dd></div><div><dt>What you get</dt><dd>Five pages: design, build, domain and hosting setup.</dd></div><div><dt>Afterwards</dt><dd>30 days of free edits; care plan from $40 a month</dd></div></dl><a class="button" href="contact.html?service=Website">Plan a website</a></article>
+    <article class="pcard"><h3>AI automation</h3><p class="price">$500</p><dl><div><dt>Turnaround</dt><dd>1 to 3 weeks</dd></div><div><dt>What you get</dt><dd>One workflow, built and documented.</dd></div><div><dt>Afterwards</dt><dd>30 days of tuning; hosting from $50 a month</dd></div></dl><a class="button" href="contact.html?service=AI%20automation">Automate a task</a></article>
+  </div>
+  <p class="pricing__note">Something not listed, like a network install or a one-off fix at the office? Prices for those are quoted per job.</p>
+</section>
+
+<!-- FAQ: a band per question -->
+<section class="faq" id="faq" aria-labelledby="faq-title">
+  <div class="faq__title"><h2 id="faq-title" data-lines>Questions, answered</h2></div>
+  <div class="qa"><h3 data-reveal>Do you charge to look at my computer?</h3><p data-reveal style="--i:1">The diagnostic is $49. If you go ahead with the repair, that $49 comes off the bill. You get the price in writing before we touch anything.</p></div>
+  <div class="qa"><h3 data-reveal>Do I have to bring it in?</h3><p data-reveal style="--i:1">No. Drop it off, book a local pickup, or let us connect remotely; most software problems (slowdowns, viruses, setup) can be fixed without the machine leaving your desk.</p></div>
+  <div class="qa"><h3 data-reveal>Can you build with parts I already own?</h3><p data-reveal style="--i:1">Yes. We check what you have, keep what is still worth keeping, and quote only for the rest. Upgrades to an existing PC work the same way.</p></div>
+  <div class="qa"><h3 data-reveal>What does AI automation mean for a small business?</h3><p data-reveal style="--i:1">Taking one task you repeat every day and handing it to software: sorting email, pulling numbers out of invoices, answering the same customer questions, booking appointments. We start with one task, measure the time saved, then decide what is next.</p></div>
+  <div class="qa"><h3 data-reveal>Will I be able to update my own website?</h3><p data-reveal style="--i:1">Yes. Every site comes with a short walkthrough of how to change text, photos and opening hours. If you would rather not, the care plan covers updates for you.</p></div>
+  <div class="qa"><h3 data-reveal>Are my files safe during a repair?</h3><p data-reveal style="--i:1">We back up your data before any risky work when the drive allows it, we do not browse your files, and anything we recover stays with you.</p></div>
+</section>
+
+<!-- Close: the action tile -->
+<section class="cta" aria-labelledby="cta-title">
+  <div class="cta__flank cta__flank--l" data-reveal><img src="assets/img/collection-of-historical-cpus.jpg" width="1600" height="1066" alt="" loading="lazy"></div>
+  <div class="cta__main" data-reveal style="--i:1">
+    <h2 id="cta-title">Tell us what you need</h2>
+    <p>A broken laptop, a new website or a task that eats your week: send a few lines and get a reply within one business day.</p>
+    <a class="button" href="contact.html">Open the contact form <span class="arrow" aria-hidden="true">→</span></a>
+  </div>
+  <div class="cta__flank cta__flank--r" data-reveal style="--i:2"><video autoplay muted loop playsinline preload="metadata" poster="assets/img/loten-salmiakstein-poster.jpg" width="854" height="480" aria-hidden="true"><source src="assets/img/loten-salmiakstein.webm" type="video/webm"></video></div>
+</section>
+
+</main>
+
+<footer class="foot">
+  <div class="blocks" aria-label="KLJ Systems" role="img" data-reveal-group>
+    <span class="block" style="--h:100%;--hs:1.4;--i:0" aria-hidden="true">K</span>
+    <span class="block" style="--h:78%;--hs:1.1;--i:1" aria-hidden="true">L</span>
+    <span class="block" style="--h:92%;--hs:1.3;--i:2" aria-hidden="true">J</span>
+    <span class="block block--gap" aria-hidden="true"></span>
+    <span class="brk" aria-hidden="true"></span>
+    <span class="block" style="--h:64%;--hs:.9;--i:3" aria-hidden="true">S</span>
+    <span class="block" style="--h:84%;--hs:1;--i:4" aria-hidden="true">y</span>
+    <span class="block" style="--h:70%;--hs:.85;--i:5" aria-hidden="true">s</span>
+    <span class="block" style="--h:96%;--hs:1.05;--i:6" aria-hidden="true">t</span>
+    <span class="block" style="--h:60%;--hs:.8;--i:7" aria-hidden="true">e</span>
+    <span class="block" style="--h:80%;--hs:.95;--i:8" aria-hidden="true">m</span>
+    <span class="block" style="--h:68%;--hs:.9;--i:9" aria-hidden="true">s</span>
+  </div>
+  <div class="foot__grid">
+    <nav class="foot__col" aria-label="Services"><h3>Services</h3><a href="index.html#websites">Websites</a><a href="index.html#automation">AI automation</a><a href="index.html#builds">Custom PC builds</a><a href="index.html#repairs">PC repair</a><a href="index.html#support">IT support</a></nav>
+    <nav class="foot__col" aria-label="Company"><h3>On this site</h3><a href="index.html#build">Price a build</a><a href="index.html#process">How it works</a><a href="index.html#pricing">Pricing</a><a href="index.html#faq">FAQ</a></nav>
+    <nav class="foot__col" aria-label="Get in touch"><h3>Get in touch</h3><a href="contact.html">Contact form</a><a href="contact.html?service=PC%20repair">Book a repair</a><a href="contact.html?service=Website">Plan a website</a></nav>
+    <div class="foot__contact">
+      <p class="lead"><a class="link" href="mailto:hello@kljsystems.com">hello@kljsystems.com</a></p>
+      <p>Monday to Saturday, 9 am to 6 pm. In-shop, on-site and remote help.</p>
+    </div>
+  </div>
+  <div class="foot__last">
+    <span>© <span data-year>2026</span> KLJ Systems</span>
+    <a class="button" href="#main">Back to top <span class="arrow" aria-hidden="true">↑</span></a>
+  </div>
+  <p class="credits">Pictures and footage: <a href="https://commons.wikimedia.org/wiki/File:Computer_motherboard_6.jpg">“Computer motherboard 6”</a> by Kurt Kaiser, CC0; <a href="https://commons.wikimedia.org/wiki/File:Electronics_workbench.jpg">“Electronics workbench”</a> by James Bastow, <a href="https://creativecommons.org/licenses/by-sa/2.0">CC BY-SA 2.0</a>; <a href="https://commons.wikimedia.org/wiki/File:Collection_of_historical_CPUs.jpg">“Collection of historical CPUs”</a> by Martijn Boer, public domain; <a href="https://commons.wikimedia.org/wiki/File:L%C3%B6ten_Salmiakstein.webm">“Löten Salmiakstein”</a> by Leo Miregalitheo, <a href="https://creativecommons.org/licenses/by-sa/4.0">CC BY-SA 4.0</a>. All via Wikimedia Commons. The 3D computer is drawn in code.</p>
+</footer>
+
+<script src="js/site.js" defer></script>
+<script src="js/build.js" defer></script>
+<script type="importmap">{"imports":{"three":"https://cdn.jsdelivr.net/npm/three@0.169.0/build/three.module.js","three/addons/":"https://cdn.jsdelivr.net/npm/three@0.169.0/examples/jsm/"}}</script>
+<script type="module" src="js/pc3d.js"></script>
+</body>
+</html>

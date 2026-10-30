@@ -11,6 +11,7 @@ import { EffectComposer } from 'three/addons/postprocessing/EffectComposer.js';
 import { RenderPass } from 'three/addons/postprocessing/RenderPass.js';
 import { UnrealBloomPass } from 'three/addons/postprocessing/UnrealBloomPass.js';
 import { OutputPass } from 'three/addons/postprocessing/OutputPass.js';
+import { GLTFLoader } from 'three/addons/loaders/GLTFLoader.js';
 
 const stage = document.getElementById('stage');
 const canvas = document.getElementById('pc3d');
@@ -18,7 +19,7 @@ const labelLayer = document.getElementById('pc3d-labels');
 const toggle = document.getElementById('pc3d-toggle');
 if (stage && canvas) start();
 
-function start() {
+async function start() {
   let renderer;
   try {
     renderer = new THREE.WebGLRenderer({ canvas, antialias: true, powerPreference: 'high-performance', preserveDrawingBuffer: !!window.KLJ_RENDER });
@@ -464,15 +465,108 @@ function start() {
   pc.traverse((m) => { if (m.isMesh) { m.castShadow = m.material !== M.glass; m.receiveShadow = true; } });
   pc.rotation.set(0.18, -0.55, 0);
 
+  /* ---------- AI-generated parts (Higgsfield / Tripo, see tools/models/README.md) ----------
+     Each model replaces the hand-built shape of its part, keeping the part's place in the explode.
+     basis: where the model's own x, y and z axes point in the part's space.
+     fit: the axis and length (cm) the model is scaled to. at: where its centre goes; floorZ: rest its back on this z. */
+  const AI = {
+    gpu: { file: 'gpu', basis: [[0, -1, 0], [0, 0, 1], [-1, 0, 0]], fit: ['x', 30.5], at: [0, 0.3, 0] },
+    psu: { file: 'psu', basis: [[1, 0, 0], [0, -1, 0], [0, 0, -1]], fit: ['x', 16], at: [0, 0, 0] },
+    cooler: { file: 'cooler', basis: [[1, 0, 0], [0, 0, 1], [0, -1, 0]], fit: ['z', 13.5], at: [0.6, 0, 0], floorZ: 0 },
+    memory: { file: 'ram', basis: [[1, 0, 0], [0, 0, 1], [0, -1, 0]], fit: ['y', 13.4], at: [0, 0, 0.2] },
+    board: { file: 'board', flatten: true, turn: 180, fit: ['y', 30.5], at: [0, 0, 0], floorZ: -0.1 }, // reconstructed at an angle: straightened from its own shape
+    fans: { file: 'fan', basis: [[0, 0, 1], [0, 1, 0], [-1, 0, 0]], fit: ['x', 12], at: [0, 0, 0] },
+  };
+  const modelBase = new URL('models/', import.meta.url);
+
+  /* Straighten a flat object: its thinnest direction becomes +z (the side with the parts on it facing out),
+     its longest becomes y. Principal axes of the vertices, found with a Jacobi eigen-solve. */
+  function flattenRotation(root) {
+    const pts = [];
+    root.updateMatrixWorld(true);
+    root.traverse((m) => {
+      if (!m.isMesh) return;
+      const a = m.geometry.attributes.position, v = new THREE.Vector3();
+      const step = Math.max(1, Math.floor(a.count / 20000));
+      for (let i = 0; i < a.count; i += step) pts.push(v.fromBufferAttribute(a, i).applyMatrix4(m.matrixWorld).clone());
+    });
+    const mean = pts.reduce((acc, p) => acc.add(p), new THREE.Vector3()).divideScalar(pts.length);
+    let A = [[0, 0, 0], [0, 0, 0], [0, 0, 0]];
+    for (const p of pts) { const d = [p.x - mean.x, p.y - mean.y, p.z - mean.z]; for (let i = 0; i < 3; i++) for (let j = 0; j < 3; j++) A[i][j] += d[i] * d[j]; }
+    let V = [[1, 0, 0], [0, 1, 0], [0, 0, 1]];
+    const mul = (X, Y) => X.map((r, i) => Y[0].map((_, j) => r.reduce((sum, _, k) => sum + X[i][k] * Y[k][j], 0)));
+    const tr = (X) => X[0].map((_, j) => X.map((r) => r[j]));
+    for (let it = 0; it < 60; it++) {
+      let p = 0, q = 1;
+      if (Math.abs(A[0][2]) > Math.abs(A[p][q])) [p, q] = [0, 2];
+      if (Math.abs(A[1][2]) > Math.abs(A[p][q])) [p, q] = [1, 2];
+      if (Math.abs(A[p][q]) < 1e-10) break;
+      const t = 0.5 * Math.atan2(2 * A[p][q], A[q][q] - A[p][p]), c = Math.cos(t), sn = Math.sin(t);
+      const J = [[1, 0, 0], [0, 1, 0], [0, 0, 1]];
+      J[p][p] = c; J[q][q] = c; J[p][q] = sn; J[q][p] = -sn;
+      A = mul(mul(tr(J), A), J);
+      V = mul(V, J);
+    }
+    const axes = [0, 1, 2].map((k) => ({ val: A[k][k], vec: new THREE.Vector3(V[0][k], V[1][k], V[2][k]).normalize() })).sort((a, b) => b.val - a.val);
+    const e3 = axes[2].vec;
+    let skew = 0;
+    for (const p of pts) skew += Math.pow(p.clone().sub(mean).dot(e3), 3);
+    if (skew < 0) e3.negate();                       // the side with the most stuff on it faces out
+    // in the plane: the turn that gives the tightest rectangle lines up with the board's edges
+    const u = axes[0].vec.clone(), w = new THREE.Vector3().crossVectors(e3, u);
+    const flat = pts.map((p) => { const d = p.clone().sub(mean); return [d.dot(u), d.dot(w)]; });
+    let best = { area: Infinity, a: 0, long: 0 };
+    for (let deg = 0; deg < 90; deg += 0.5) {
+      const r = (deg * Math.PI) / 180, c = Math.cos(r), sn = Math.sin(r);
+      let x0 = Infinity, x1 = -Infinity, y0 = Infinity, y1 = -Infinity;
+      for (const [x, y] of flat) { const X = x * c + y * sn, Y = -x * sn + y * c; if (X < x0) x0 = X; if (X > x1) x1 = X; if (Y < y0) y0 = Y; if (Y > y1) y1 = Y; }
+      const area = (x1 - x0) * (y1 - y0);
+      if (area < best.area) best = { area, a: r, long: x1 - x0 >= y1 - y0 ? 0 : 1 };
+    }
+    const dirA = u.clone().multiplyScalar(Math.cos(best.a)).addScaledVector(w, Math.sin(best.a));
+    const dirB = new THREE.Vector3().crossVectors(e3, dirA);
+    const e1 = best.long === 0 ? dirA : dirB;        // the longer edge becomes y
+    const e2 = new THREE.Vector3().crossVectors(e1, e3);
+    return new THREE.Matrix4().set(e2.x, e2.y, e2.z, 0, e1.x, e1.y, e1.z, 0, e3.x, e3.y, e3.z, 0, 0, 0, 0, 1);
+  }
+  async function useAIModels() {
+    const loader = new GLTFLoader();
+    const sizeOf = (box, axis) => box.getSize(new THREE.Vector3())[axis];
+    await Promise.all(Object.entries(AI).map(async ([id, cfg]) => {
+      let gltf;
+      try { gltf = await loader.loadAsync(new URL(`${cfg.file}.glb`, modelBase).href); } catch { return; } // keep the hand-built part
+      const src = gltf.scene;
+      src.traverse((m) => { if (m.isMesh) { m.castShadow = true; m.receiveShadow = true; if (m.material) m.material.envMapIntensity = 1; } });
+      for (const p of parts.filter((q) => q.id === id)) {
+        const wrap = new THREE.Group();
+        const model = src.clone(true);
+        const basis = cfg.flatten ? flattenRotation(src) : new THREE.Matrix4().makeBasis(...cfg.basis.map((v) => new THREE.Vector3(...v)));
+        model.quaternion.setFromRotationMatrix(basis);
+        if (cfg.turn) model.quaternion.premultiply(new THREE.Quaternion().setFromAxisAngle(new THREE.Vector3(0, 0, 1), (cfg.turn * Math.PI) / 180));
+        wrap.add(model);
+        wrap.updateMatrixWorld(true);
+        let box = new THREE.Box3().setFromObject(model);
+        const k = cfg.fit[1] / sizeOf(box, cfg.fit[0]);
+        model.position.copy(box.getCenter(new THREE.Vector3())).negate();
+        wrap.scale.setScalar(k);
+        wrap.position.set(...cfg.at);
+        if (cfg.floorZ !== undefined) wrap.position.z = cfg.floorZ + (sizeOf(box, 'z') * k) / 2;
+        p.obj.clear();
+        p.obj.add(wrap);
+        p.obj.traverse((m) => { m.userData.id = id; });
+      }
+    }));
+  }
+
   /* ---------- what each part does ---------- */
   const INFO = {
     glass: ['Glass side panel', 'Tempered glass so the build is on show. We route every cable behind the tray, so the view stays clean.'],
     case: ['Case', 'The frame that holds it all. We choose cases for airflow first and looks second, with room to upgrade later.'],
     fans: ['Case fans', 'Pull cool air in at the front and push warm air out the back. We tune the fan curves so it stays quiet at your desk.'],
-    board: ['Motherboard', 'The board every part plugs into. We pick one with the ports, Wi-Fi and upgrade room you'll actually use.'],
+    board: ["Motherboard", "The board every part plugs into. We pick one with the ports, Wi-Fi and upgrade room you'll actually use."],
     cpu: ['Processor', 'The CPU runs everything you do. Gaming builds favour fast cores; editing and workstation builds favour more of them.'],
     cooler: ['CPU cooler', 'Keeps the processor cool and quiet under load. Every build runs a 24-hour stress test before it leaves the shop.'],
-    memory: ['Memory', 'RAM holds what you're working on right now. 32 GB covers most people; video editing and 3D want 64 GB or more.'],
+    memory: ["Memory", "RAM holds what you're working on right now. 32 GB covers most people; video editing and 3D want 64 GB or more."],
     storage: ['Storage', 'The NVMe SSD where Windows, games and files live. It boots in seconds, and we set up backups so nothing is lost.'],
     gpu: ['Graphics card', 'Draws every frame in games and speeds up video and AI work. Usually the biggest single part of the budget.'],
     psu: ['Power supply', 'Feeds steady power to every part. We size it with headroom and fit 80+ Gold or better, never a no-name unit.'],
@@ -744,6 +838,7 @@ function start() {
     scene.background = new THREE.Color(0x000000);
     renderer.setPixelRatio(1);
     fit();
+    if (!new URLSearchParams(location.search).has('handbuilt')) await useAIModels();
     window.__klj = {
       frame(t, yawOffset = 0) {
         explode = t;

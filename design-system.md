@@ -98,8 +98,10 @@ Loaded with `https://fonts.googleapis.com/css2?family=Geist:wght@300;400;600&dis
 
 ## Imagery
 
-- **Hero:** the in-house 3D render of a KLJ build (`tools/pc3d.js`), exported as a 64-frame image sequence
-  (`assets/pc/d` 1600×1000, `assets/pc/m` 900×1200, WebP). Pure black background, purple light.
+- **Hero:** a 3D render of a KLJ build, exported as a 64-frame image sequence (`assets/pc/d` 1600×1000,
+  `assets/pc/m` 900×1200, WebP). The graphics card, power supply, CPU cooler, memory, motherboard and fans are
+  AI-generated models (Higgsfield: GPT Image 2.5 reference, Tripo H3.1 image-to-3D; see `tools/models/README.md`);
+  the case, glass, CPU and drive are built in code (`tools/pc3d.js`). Pure black background, purple light.
 - **Other photos:** currently openly licensed Wikimedia Commons photos (credited in the footer). To replace with custom
   visuals: real photos of KLJ's bench and builds, or AI-generated images (needs Higgsfield credits).
 - **Interface fragments** (code, automation log) are built in HTML, not screenshots.

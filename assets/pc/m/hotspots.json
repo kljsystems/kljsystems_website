@@ -3,21 +3,21 @@
     "id": "glass",
     "title": "Glass side panel",
     "text": "Tempered glass so the build is on show. We route every cable behind the tray, so the view stays clean.",
-    "x": 0.2164,
+    "x": 0.2161,
     "y": 0.398
   },
   {
     "id": "fans",
     "title": "Case fans",
     "text": "Pull cool air in at the front and push warm air out the back. We tune the fan curves so it stays quiet at your desk.",
-    "x": 0.7797,
+    "x": 0.7796,
     "y": 0.3753
   },
   {
     "id": "board",
     "title": "Motherboard",
     "text": "The board every part plugs into. We pick one with the ports, Wi-Fi and upgrade room you'll actually use.",
-    "x": 0.5592,
+    "x": 0.5593,
     "y": 0.4517
   },
   {
@@ -25,7 +25,7 @@
     "title": "Processor",
     "text": "The CPU runs everything you do. Gaming builds favour fast cores; editing and workstation builds favour more of them.",
     "x": 0.3883,
-    "y": 0.4489
+    "y": 0.4488
   },
   {
     "id": "cooler",
@@ -38,8 +38,8 @@
     "id": "memory",
     "title": "Memory",
     "text": "RAM holds what you're working on right now. 32 GB covers most people; video editing and 3D want 64 GB or more.",
-    "x": 0.6233,
-    "y": 0.2901
+    "x": 0.6232,
+    "y": 0.2902
   },
   {
     "id": "storage",
@@ -52,7 +52,7 @@
     "id": "gpu",
     "title": "Graphics card",
     "text": "Draws every frame in games and speeds up video and AI work. Usually the biggest single part of the budget.",
-    "x": 0.4594,
+    "x": 0.4591,
     "y": 0.6498
   },
   {
@@ -60,6 +60,6 @@
     "title": "Power supply",
     "text": "Feeds steady power to every part. We size it with headroom and fit 80+ Gold or better, never a no-name unit.",
     "x": 0.2117,
-    "y": 0.7673
+    "y": 0.7672
   }
 ]

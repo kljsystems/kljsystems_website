@@ -5,3 +5,5 @@ out/
 .env.*
 .taste-skill/
 .frames/
+tools/models/*.glb
+.render.log

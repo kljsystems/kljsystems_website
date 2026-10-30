@@ -3,15 +3,15 @@
     "id": "glass",
     "title": "Glass side panel",
     "text": "Tempered glass so the build is on show. We route every cable behind the tray, so the view stays clean.",
-    "x": 0.316,
-    "y": 0.3609
+    "x": 0.3158,
+    "y": 0.3608
   },
   {
     "id": "fans",
     "title": "Case fans",
     "text": "Pull cool air in at the front and push warm air out the back. We tune the fan curves so it stays quiet at your desk.",
     "x": 0.6781,
-    "y": 0.3315
+    "y": 0.3316
   },
   {
     "id": "board",
@@ -52,7 +52,7 @@
     "id": "gpu",
     "title": "Graphics card",
     "text": "Draws every frame in games and speeds up video and AI work. Usually the biggest single part of the budget.",
-    "x": 0.4742,
+    "x": 0.4741,
     "y": 0.7045
   },
   {
@@ -60,6 +60,6 @@
     "title": "Power supply",
     "text": "Feeds steady power to every part. We size it with headroom and fit 80+ Gold or better, never a no-name unit.",
     "x": 0.3221,
-    "y": 0.8513
+    "y": 0.8512
   }
 ]
